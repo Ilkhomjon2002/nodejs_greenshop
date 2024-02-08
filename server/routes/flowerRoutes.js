@@ -24,10 +24,14 @@ route.post("/", async (req, res) => {
 		});
 });
 route.put("/:id", async (req, res) => {
-	const { _id } = req.params;
+	const { id } = req.params;
 	const { image, title, description, type } = req.body;
 	return await flowerModel
-		.findOneAndUpdate(_id, { image, title, description, type }, { new: true })
+		.updateOne(
+			{ _id: id },
+			{ $set: { image, title, description, type } },
+			{ new: true }
+		)
 		.then((response) => {
 			console.log(response);
 			res.status(200).json({
