@@ -10,7 +10,7 @@ route.get("/", async (req, res) => {
 route.post("/", async (req, res) => {
 	const { image, title, description, type } = req.body;
 
-	return await flowerModel
+	return flowerModel
 		.create({ image, title, description, type })
 		.then((response) => {
 			res.status(200).json({
@@ -26,7 +26,7 @@ route.post("/", async (req, res) => {
 route.put("/:id", async (req, res) => {
 	const { id } = req.params;
 	const { image, title, description, type } = req.body;
-	return await flowerModel
+	return flowerModel
 		.updateOne(
 			{ _id: id },
 			{ $set: { image, title, description, type } },
@@ -49,7 +49,7 @@ route.delete("/:id", async (req, res) => {
 
 	const { id } = req.params;
 
-	return await flowerModel
+	return flowerModel
 		.findByIdAndDelete(id)
 		.then((response) => {
 			res.status(200).json({
